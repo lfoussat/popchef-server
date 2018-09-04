@@ -3,7 +3,6 @@ const app = express()
 const port = 4000
 
 const mysql = require('mysql2/promise')
-const db = require('./assets/database/requete1.js')
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -18,9 +17,11 @@ const exec = async (query, params) => {
   return result[0]
 }
 
+const dbRequest = id => require(`./assets/database/requete${id}.js`)
+
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
 })
 app.get('/', (req, res) => {
@@ -30,10 +31,12 @@ app.get('/', (req, res) => {
 // get meals
 app.get('/meals/:id', async (req, res) => {
   const id = req.params.id
-  const meals = await exec(db.getMeals())
+  const request = dbRequest(id)
+  const meals = await exec(request.getMeals())
 
   res.json(meals)
 })
+
 // ERRORS
 app.use((err, req, res, next) => {
   if (err) {
