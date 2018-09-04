@@ -1,0 +1,22 @@
+{
+  "name": "popchef-server",
+  "version": "1.0.0",
+  "description": "The backend for our popchef app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfoussat/popchef-server.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lfoussat/popchef-server/issues"
+  },
+  "homepage": "https://github.com/lfoussat/popchef-server#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
