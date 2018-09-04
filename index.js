@@ -34,4 +34,13 @@ app.get('/meals/:id', async (req, res) => {
 
   res.json(meals)
 })
+// ERRORS
+app.use((err, req, res, next) => {
+  if (err) {
+    res.json({ error: err.message })
+    console.error(err)
+  }
+  next(err)
+})
+
 app.listen(port, err => console.log(err || `server listening on port ${port}`))
