@@ -3,6 +3,8 @@ const app = express()
 const port = 4000
 
 const mysql = require('mysql2/promise')
+const db = require('./assets/database/requete1.js')
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -25,4 +27,11 @@ app.get('/', (req, res) => {
   res.send('OK')
 })
 
+// get meals
+app.get('/meals/:id', async (req, res) => {
+  const id = req.params.id
+  const meals = await exec(db.getMeals())
+
+  res.json(meals)
+})
 app.listen(port, err => console.log(err || `server listening on port ${port}`))
