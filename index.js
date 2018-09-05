@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const port = 4000
 
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
+const readFile = util.promisify(fs.readFile)
+const writeFile = util.promisify(fs.writeFile)
 const mysql = require('mysql2/promise')
 
 const connection = mysql.createConnection({
