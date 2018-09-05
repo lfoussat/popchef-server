@@ -7,6 +7,9 @@ const path = require('path')
 const util = require('util')
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
+
+const logDir = path.join(__dirname, 'assets')
+
 const use = require('./usefull.js')
 
 const mysql = require('mysql2/promise')
@@ -37,6 +40,13 @@ app.get('/meals/:id', async (req, res) => {
   const id = req.params.id
   const request = dbRequest(id)
   const meals = await exec(request.getMeals())
+
+  const filename = 'log.txt'
+  const filepath = path.join(logDir, filename)
+  const logs = await readFile(filepath, 'utf8').then(JSON.parse)
+  const newlog = { date: use.formatedDate(Date.now()), request: request.getMeals() }
+  logs.logs.push(newlog)
+  writeFile(filepath, JSON.stringify(logs, null, 2), 'utf8')
 
   res.json(meals)
 })

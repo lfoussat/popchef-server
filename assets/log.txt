@@ -1,0 +1,12 @@
+{
+  "logs": [
+    {
+      "date": "10:45 am - Sep 5, 2018",
+      "request": "SELECT * FROM meals"
+    },
+    {
+      "date": "10:46 am - Sep 5, 2018",
+      "request": "SELECT * FROM meals"
+    }
+  ]
+}
