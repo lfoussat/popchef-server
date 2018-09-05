@@ -16,7 +16,7 @@ const mysql = require('mysql2/promise')
 
 const connection = mysql.createConnection({
   host: 'popchef-server.herokuapp.com' || 'localhost',
-  user: 'root',
+  user: 'b43c3bfa7b28cd' || 'root',
   database: 'popchef'
 })
 
