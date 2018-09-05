@@ -14,10 +14,18 @@ const use = require('./usefull.js')
 
 const mysql = require('mysql2/promise')
 
+
+const url = process.env.DATABASE_URL
+const groups = url.match(/mysql:\/\/(\w+):(\w+)@([\w-.]+)\/(\w+)?/)
+
 const connection = mysql.createConnection({
   host: 'us-cdbr-iron-east-01.cleardb.net',
   user: 'b43c3bfa7b28cd',
-  database: 'heroku_6aaa6cc07419e74'
+  database: 'heroku_6aaa6cc07419e74',
+  password: groups[2],
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 })
 
 const exec = async (query, params) => {
