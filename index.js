@@ -15,23 +15,10 @@ const use = require('./usefull.js')
 const mysql = require('mysql2/promise')
 
 const url = process.env.DATABASE_URL
-const groups = url.match(/mysql:\/\/(\w+):(\w+)@([\w-.]+)\/(\w+)?/)
+const pool = mysql.createPool(`${url}?waitForConnections=true&connectionLimit=10&queueLimit=0`)
 
-const connection = mysql.createConnection({
-  host: groups[3],
-  user: groups[1],
-  database: groups[4],
-  password: groups[2],
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-})
-
-const exec = async (query, params) => {
-  const connect = await connection
-  const result = await connect.execute(query, params)
-
-  return result[0]
+const exec = (query, params) => {
+  return first(pool.execute(query, params))
 }
 
 const dbRequest = id => require(`./assets/database/requete${id}.js`)
