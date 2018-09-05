@@ -18,9 +18,9 @@ const url = process.env.DATABASE_URL
 const groups = url.match(/mysql:\/\/(\w+):(\w+)@([\w-.]+)\/(\w+)?/)
 
 const connection = mysql.createConnection({
-  host: 'us-cdbr-iron-east-01.cleardb.net',
-  user: 'b43c3bfa7b28cd',
-  database: 'heroku_6aaa6cc07419e74',
+  host: groups[3],
+  user: groups[1],
+  database: groups[4],
   password: groups[2],
   waitForConnections: true,
   connectionLimit: 10,
