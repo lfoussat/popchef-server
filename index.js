@@ -15,9 +15,9 @@ const use = require('./usefull.js')
 const mysql = require('mysql2/promise')
 
 const connection = mysql.createConnection({
-  host: 'popchef-server.herokuapp.com' || 'localhost',
-  user: 'b43c3bfa7b28cd' || 'root',
-  database: 'heroku_6aaa6cc07419e74' || 'popchef'
+  host: 'us-cdbr-iron-east-01.cleardb.net',
+  user: 'b43c3bfa7b28cd',
+  database: 'heroku_6aaa6cc07419e74'
 })
 
 const exec = async (query, params) => {
