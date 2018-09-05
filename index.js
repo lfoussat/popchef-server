@@ -17,6 +17,8 @@ const mysql = require('mysql2/promise')
 const url = process.env.DATABASE_URL
 const pool = mysql.createPool(`${url}?waitForConnections=true&connectionLimit=10&queueLimit=0`)
 
+const first = async q => (await q)[0]
+
 const exec = (query, params) => {
   return first(pool.execute(query, params))
 }
